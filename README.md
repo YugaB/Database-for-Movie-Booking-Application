@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# CMPE226
-
 ## Movie Booking Application
 
 ### To Run Application 
@@ -70,7 +67,7 @@ Designed and developed relational and non-relational databases for Movie Booking
 1. MySQL (AWS RDS)
 2. Mongodb Atlas
 
-## Steps followed:
+## Steps followed for designing database:
 1. Used MySQL database to store relational data such as users, admin, movies, theaters, screens, seats.
 2. Created ERD and performed entity relational mapping
 3. Designed and developed MySQL database schema. 
@@ -78,4 +75,4 @@ Designed and developed relational and non-relational databases for Movie Booking
 5. Created stored procedure, view and triggers.
 6. Maintained tables in 3NF.
 7. Stored data such as ratings and reviews for moviews and theaters in MongoDB using Atlas.
->>>>>>> 8e813f8da31d38aebd7d91e16ccac3d028148553
+

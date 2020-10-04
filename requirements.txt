@@ -1,0 +1,5 @@
+bcrypt
+flask_pymongo
+PyMongo
+Flask
+flask-mysql

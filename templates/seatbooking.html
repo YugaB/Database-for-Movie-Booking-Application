@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+body {
+       background-color: #cccccc;
+}
+
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30px;
+    width: 30px;
+    background-color: #f4a742;
+}
+
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+.registerbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+.registerbtn:hover {
+    opacity: 1;
+}
+
+</style>
+
+    </head>
+    <body>
+      <br/><br/>
+      <h1 align="center">SEAT SELECTING</h1>
+      <form action="{{ url_for('holdSeats') }}" method="post">
+        <div>
+            <h2 align="center">Screen</h2>
+        </div>
+          <div>
+            <table align="center">
+            </tr>
+            {% for row in range(1, 6) %}
+                <tr>
+                    {% for col in range(1, 11) %}
+                    {% set curr_row = row | string %}
+                    {% set curr_col = col | string %}
+                    {% set info = curr_row + '-' + curr_col %}
+                    <td>
+                        <label class="container">
+                            {{ col }}
+                            <br>
+                            <input type="checkbox" class="container" value={{ info }} name="seatInfo"/>
+                            <span class="checkmark"></span>
+                            <br>
+                        </label>
+                    </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </table>
+              <input type="hidden" value= {{ showTime }} name="showTime"/>
+              <input type="hidden" value= {{ showID }} name="showID"/>
+            <button type="submit" class="registerbtn">Book Seats</button>
+        </div>
+    </form>
+    </table>
+    </body>
+</html>
+

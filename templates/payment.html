@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 16px;
+    background-color: white;
+}
+
+input[type=text], [type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text], [type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+.registerbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.registerbtn:hover {
+    opacity: 1;
+}
+    </style>
+</head>
+<body>
+
+<form action="{{ url_for('payment') }}" method="post">
+
+  <div class="container">
+    <h1>Confirm Booking</h1>
+    <p>Do you accept?</p>
+    <hr>
+
+      Movie Name: <label>{{ movieName }}</label><br>
+      <br>
+      Show Date: <label>{{ showDate }}</label><br>
+      <br>
+      Show Time: <label>{{ showTime }}</label><br>
+      <br>
+      {% for seat in seatInfo %}
+      Seats: <label>{{ seat }}</label><br>
+      {% endfor %}
+      <br>
+      {% set totalSeats = seatInfo | length %}
+      {% set cost = (totalSeats * price) - discount %}
+      Price $: <label>{{ cost }}</label><br>
+      <br>
+
+    <label><b>Yes</b>
+        <input type="checkbox" value="Yes" name="decision" />
+    </label>
+
+    <label><b>No</b>
+        <input type="checkbox" value="No" name="decision" />
+    </label>
+
+    <hr>
+      <input type="hidden" value= {{ userID }} name="userID"/>
+      <input type="hidden" value= {{ showID }} name="showID"/>
+    <input type="hidden" value= {{ showTime }} name="showTime"/>
+    <button type="submit" class="registerbtn">Confirm</button>
+  </div>
+
+</form>
+
+</body>
+</html>

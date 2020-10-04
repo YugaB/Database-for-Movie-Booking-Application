@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+}
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 16px;
+    background-color: white;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+input[type=text]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+.registerbtn {
+    background-color: blue;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+.registerbtn:hover {
+    opacity: 1;
+}
+.signin {
+    background-color: #f1f1f1;
+    text-align: center;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+    </style>
+</head>
+<body>
+
+<form action="{{ url_for('addShowTimes') }}" method="post">
+    <div class="container">
+        <h1>Add Movie Show Times</h1>
+        <hr>
+        {% if bookedSlots | length == 0 %}
+        <p>All Time Slots Are Available</p>
+        <p>Total Screens: {{ totalScreens }}</p>
+        <p>Screen IDs: {{ allScreenID }}</p>
+        {% else %}
+        <p>Unavailable Screen - Time Slot Mapping</p>
+        {% set max_screens = totalScreens | int %}
+        <table align="center">
+            <th>Screen ID</th>
+            <th>Show Times</th>
+            {% for screen in range(1, max_screens + 1) %}
+            <tr>
+                <td>{{ screen }}</td>
+                <td>
+                    {% for screenID in bookedSlots %}
+                    {% if screenID == screen %}
+                    {{ bookedSlots[screenID] }}
+                    {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <hr>
+
+        <label><b>Screen ID</b></label>
+        <input type="text" placeholder="Select 1 Screen" name="screenID" required>
+
+        <label><b>Show Times</b></label>
+        <input type="text" placeholder="Enter comma separated Show Times in HH:MM:SS (24 hr clock)" name="showTime" required>
+
+        <hr>
+        <input type="hidden" name="theaterID" value= {{ theaterID }} required>
+        <input type="hidden" name="movieID" value= {{ movieID }} required>
+        <button type="submit" class="registerbtn">Register</button>
+    </div>
+
+</form>
+
+</body>
+</html>

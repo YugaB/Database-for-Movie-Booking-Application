@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+}
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 16px;
+    background-color: white;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+input[type=text]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+.registerbtn {
+    background-color: blue;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+.registerbtn:hover {
+    opacity: 1;
+}
+
+.dropbtn {
+    background-color: #f1f1f1;
+    color: black;
+    padding: 30px;
+    font-size: 16px;
+    border: none;
+    width: 100%;
+    height: 40px;
+}
+</style>
+</head>
+<body>
+
+<form action="{{ url_for('addFeedbackMovie') }}" method="post">
+  <div class="container">
+    <h1>Add Movie Feedback</h1>
+    <hr>
+    <label><b>Select Movie</b></label>
+    <select name="movieName" class="dropbtn">
+        <option>Select Movie</option>
+        {% for movie in allMovies %}
+        <option value="{{ movie }}">{{ movie }}</option>
+        {% endfor %}
+    </select>
+    <hr>
+    <label><b>Enter Rating</b></label>
+    <input type="text" placeholder="Enter Movie Rating Between 1-5" name="rating" required>
+
+    <label><b>Feedback</b></label>
+    <input type="text" placeholder="Feedback" name="feedback" required>
+
+    <hr>
+    <button type="submit" class="registerbtn">Submit</button>
+  </div>
+
+</form>
+
+</body>
+</html>

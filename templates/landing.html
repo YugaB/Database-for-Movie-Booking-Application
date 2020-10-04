@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flask Template Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+    html {
+      font-family: sans-serif;
+      background: url("static/images/landingimg.png");
+      padding: 1rem;
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    body {
+      max-width: 960px;
+      margin: 0 auto;
+      background: white;
+     }
+       .container {
+        max-width: 500px;
+        padding-top: 100px;
+      }
+      h2 {color: red;}
+      .topnav {
+        overflow: hidden;
+        background-color: #333;
+       }
+       .search {
+        margin-top: 400px;
+        height: 0px;
+        margin-left: 200px;
+       }
+    </style>
+  </head>
+  <body>
+  {% block navbar %}
+  <nav class="navbar navbar-inverse navbar-fixed-top"  role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/" style="{ height:50px}">Movie Buff!</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        {% if session.logged_in %}
+        <li class="dropdown">
+            <a href=# class="dropdown-toggle" data-toggle="dropdown">{{ userName }}<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ url_for('movieFeedback') }}">Movie Feedback</a></li>
+                <li class="divider"></li>
+                <li><a href="{{ url_for('theaterFeedback') }}">Theater Feedback</a></li>
+            </ul>
+        </li>
+          <li><a href="{{ url_for('userLogout') }}">Logout</a></li>
+        {% else %}
+        <li><a href="{{ url_for('adminSignIn') }}">Admin Login</a></li>
+          <li><a href="{{ url_for('userSignIn') }}">User Login</a></li>
+        {% endif %}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div>
+  </nav>
+  {% endblock %}
+  {% block content %}
+  <!--<div class="bg"><img src="static/images/landingimg.png" height="820px" width="100%"></div>-->
+  {% block search %}
+  <div class="search">
+    <form class="form-inline" action="{{ url_for('initialMovieTheaterSearch') }}" method="post">
+    <div class="form-group" style="{ padding:100px }">
+      <input type="text" class="form-control" placeholder="City"  name="city">
+    </div>
+    <div class="form-group">
+      <input type="date" class="form-control" placeholder="Date" name="date">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  {% endblock %}
+  {% endblock %}
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  </body>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+}
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 16px;
+    background-color: white;
+    padding-top: 80px;
+}
+
+.registerbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+.registerbtn:hover {
+    opacity: 1;
+}
+
+a {
+    color: dodgerblue;
+}
+table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+tr:nth-child(even){background-color: #f2f2f2;}
+tr:hover {background-color: #ddd;}
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+}
+#theatername {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #924caf;
+    color: white;
+}
+#filter{
+    padding-left: 400px;
+}
+</style>
+</head>
+<body>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+{% block navbar %}
+  <nav class="navbar navbar-inverse navbar-fixed-top"  role="navigation">
+  <div class="container-fluid" id="filter">
+    <form class="navbar-form navbar-left" role="search" action="{{ url_for('filter') }}" method="post">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Movie" name="movie">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Theater" name="theater">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Genre" name="genre">
+        </div>
+        <input type="hidden" name="city" value= "{{ city }}" required/>
+        <input type="hidden" name="showDate" value= {{ showdate }} required/>
+        <button type="submit" class="btn btn-default">Search</button>
+    </form>
+  </div>
+  </nav>
+  {% endblock %}
+{% block display %}
+<form action="{{ url_for('movieShowTimes') }}" method="post">
+    <div class="container">
+        <h2 align="center"><b>Theaters Playing Following Movies</b></h2>
+        {% for theater_id in allMovies %}
+        <table>
+            <th id="theatername">
+                <input type="checkbox" value="{{ theater_id }}/{{ allMovies[theater_id].theaterName }}" name="theaterObj" height="50px"> {{ allMovies[theater_id]['theaterName'] }} - {{ allMovies[theater_id]['address'] }}</th>
+                {% if theater_id in allTheaterFeedbacks %}
+                <tr>
+                    <td align="center" bgcolor="orange"><b>Theater Rating: {{ allTheaterFeedbacks[theater_id][0] }}</b></td>
+                </tr>
+                {% endif %}
+            </th>
+            {% for movie in allMovies[theater_id]['movies'] %}
+            <tr>
+                <td>
+                    <input type="checkbox" value="{{ movie.movieID }}/{{ movie.movieName }}" name="movieObj" height="50px"/> {{ movie['movieName'] }} - {{ movie['genre'] }}
+                    {% if movie['movieName'] in allMovieFeedbacks %}
+                    <b><br>Movie Rating: {{ allMovieFeedbacks[movie['movieName']][0] }}</b>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+         {% endfor %}
+        <input type="hidden" name="showDate" value= {{ showdate }} required>
+        <input type="submit" class="registerbtn" />
+    </div>
+</form>
+{% endblock %}
+</body>
+</html>

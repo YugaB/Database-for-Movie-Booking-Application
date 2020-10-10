@@ -27,7 +27,7 @@ python server.py
 #### Database:
 ```
 - MySQL (AWS RDS)
-- MongoDB (Atlas)
+- MongoDB (mlab)
 ```
 
 ---

@@ -1,15 +1,12 @@
 ## Movie Booking Application
 
 ### To Run Application 
-
 ```
 cd cmpe226
 pip install -r requirements.txt
 python server.py
 ```
-
 ---
-
 ### Technologies:
 
 #### Front-end:
@@ -17,21 +14,17 @@ python server.py
 - Jinja
 - HTML
 ```
-
 #### Back-end:
 ```
 - Python
 - Flask
 ```
-
 #### Database:
 ```
 - MySQL (AWS RDS)
 - MongoDB (mlab)
 ```
-
 ---
-
 ### Login Details
 
 ###### User Login
@@ -47,7 +40,6 @@ python server.py
 | Admin1        | admin1@gmail.com     | Admin1          |
 | Admin2        | admin2@gmail.com     | Admin2          |
 | TestAdmin     | testadmin@gmail.com  | TestAdmin       |
-
 ---
 
 ### Data Details

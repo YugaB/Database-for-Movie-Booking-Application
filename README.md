@@ -45,7 +45,7 @@ python server.py
 ### Data Details
 
 1. Currently the database contains data for San Francisco and San Jose city.
-2. With in following date range: 2019-06-01 to 2019-06-11
+2. With in following date range: 2019-09-01 to 2019-09-11
 
 Examples:
 
@@ -53,11 +53,12 @@ Examples:
 
 ![example2](static/images/example2.png)
 =======
-# Database-for-Movie-Booking-Application
+# Database for Movie Booking Application
 Designed and developed relational and non-relational databases for Movie Booking Application
+
 ## Databases Used:
 1. MySQL (AWS RDS)
-2. Mongodb Atlas
+2. Mongodb mlab
 
 ## Steps followed for designing database:
 1. Used MySQL database to store relational data such as users, admin, movies, theaters, screens, seats.

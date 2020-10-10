@@ -74,5 +74,5 @@ Designed and developed relational and non-relational databases for Movie Booking
 4. Wrote SQL queries to create database objects such as tables with Primary keys, foreign keys, indexes.
 5. Created stored procedure, view and triggers.
 6. Maintained tables in 3NF.
-7. Stored data such as ratings and reviews for moviews and theaters in MongoDB using Atlas.
+7. Stored data such as ratings and reviews for movies and theaters in MongoDB using mlab.
 
